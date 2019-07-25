@@ -11,22 +11,33 @@ var action = process.argv[2]
 //======================================//
 // Axios/OMDB
 
-
+//grabs action from cli
 if (action == "movie-this") {
-  var args = process.argv;
-  var movie = [];
+ 
+  //if nothing is input into the console after movie-this, the default search is mr. nobody
+  if (process.argv[3] == undefined){
+    movieInput = "mr+nobody"
+  }
+  //if a movie is put into the console
+  else{
+    var args = process.argv;
+    var movie = [];
 
+  //pushes user input into array and creates the input for the search
   for (var i = 3; i < args.length; i++) {
     movie.push(args[i])
     var movieInput = movie.join(" ")
   };
+}
 
+// url for omdb api search
   var movieUrl = "http://www.omdbapi.com/?t=" + movieInput + "&y=&plot=short&apikey=trilogy"
 
   axios.get(movieUrl)
     .then(
       function (response) {
-        console.log(movieUrl);
+
+        //console logs all movie data retrieved
         console.log(response.data.Title);
         console.log(response.data.Year);
         console.log("IMDB rating: " + response.data.Ratings[0].Value);
