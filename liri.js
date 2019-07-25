@@ -93,23 +93,45 @@ if (action == "concert-this") {
 //================================================
 //spotify
 if (action == "spotify-this") {
-  var args = process.argv;
-  var track = []
+//if left blank it defaults to "The Sign" by Ace of Base
+  if (process.argv [3] === undefined){
+    
+    spotify
+  .request('https://api.spotify.com/v1/tracks/0hrBpAOgrt8RXigk83LLNE')
+  .then(function(data) {
+    console.log("Track: " + data.name);
+    console.log("Artist: " + data.artists[0].name);
+    console.log("Album: " + data.album.name);
+    console.log("Spotify link to track: " + data.external_urls.spotify); 
+  })
+  .catch(function(err) {
+    console.error('Error occurred: ' + err); 
+  });
+  
+  }
 
+  // if content is entered
+  else {
+  // sets variable for user input
+  var args = process.argv;
+  //array to hold track name
+  var track = []
+//loop to format track nameinput for search
   for (var i = 3; i < args.length; i++) {
     track.push(args[i]);
     var musicQuery = track.join(" ");
+    
 
   }
-
+  // spotify search query
   spotify.search({ type: 'track', query: musicQuery }, function (err, data) {
     if (err) {
       return console.log('Error occurred: ' + err);
     }
-
-    console.log(data.tracks.items[0].album.name);
-    console.log(data.tracks.items[0].artists[0].name);
-    console.log(data.tracks.items[0].name);
-    console.log(data.tracks.items[0].external_urls.spotify);
+    //display for track, artist, album and a link to track on spotify
+    console.log("Track: " + data.tracks.items[0].name);
+    console.log("Artist: " + data.tracks.items[0].artists[0].name);
+    console.log("Album: " + data.tracks.items[0].album.name);
+    console.log("Spotify link to track: " + data.tracks.items[0].external_urls.spotify);
   })
-}
+}}
