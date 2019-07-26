@@ -47,34 +47,7 @@ switch (action) {
         var dataArr = data.split(",");
         action = dataArr[0];
         inputFull = dataArr[1].toString();
-
         liriAction();
-
-        // if (dataArr[0] == "spotify-this-song") {
-        //   inputFull = dataArr[1].toString();
-        //   spotifyThis();
-        // }
-
-
-
-
-
-        // //if statements checking for which function to call
-        // if (dataArr[0] == "spotify-this-song") {
-        //   inputFull = dataArr[1].toString();
-        //   spotifyThis();
-        // }
-        // else if (dataArr[0] == "movie-this") {
-        //   inputFull = dataArr[1].toString();
-        //   movieThis();
-        // }
-        // else if (dataArr[0] == "concert-this") {
-        //   inputFull = dataArr[1].toString();
-        //   concertThis();
-        // }
-        // else if(err){
-        //   console.log(err)
-        // };
       });
     };
 
